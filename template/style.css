@@ -1,0 +1,139 @@
+html{
+    font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
+    box-sizing: border-box;
+  }
+  body{
+    font: 1.6rem Helvetica;
+    height: 100vh;
+    /*vh 撑开 */
+    margin: 0;
+  }
+  .grid-container{
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem 1fr 5rem;
+    height: 100%;
+  }
+  .header{
+    grid-area: header;
+    background-color: #203040;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  .brand a{
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .header-links a{
+    color:#ffffff;
+    text-decoration: none;
+    padding: 1rem;
+  
+  }
+  .header-links a:hover{
+    color:#ff8000;
+  }
+  .main{
+    grid-area: main;
+  }
+  .footer{
+    grid-area: footer;
+    background-color: #203040;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  a{
+    text-decoration: none;
+  }
+  a:hover{
+    color:#ff8000
+  }
+  /* home screen */
+.products{
+    display: flex;
+    justify-content: left;
+    /* main axis */
+    align-content: center;
+    /* cross axis */
+    flex-wrap: wrap;
+
+}
+
+.products li{
+    flex:0 1 34rem;
+    /* grow, shrink,basis */
+    list-style-type: none;
+    margin: 1rem;
+    height: 50rem;
+    border-bottom: .1rem #c0c0c0 solid;
+    padding: 0;
+}
+.product{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.product-img{
+    max-height: 34rem;
+    max-width: 34rem;
+}
+.product-name{
+  font-size:2rem;
+  font-weight: bold;
+}
+.product-brand{
+  font-size:1.2rem;
+  color:grey
+}
+.product-price{
+   font-size:2rem;
+   font-weight: bold;
+}
+.product-rating{
+  font-size:1.6rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+/* side bar */
+.brand button{
+  font-size:3rem;
+  /* padding:.5rem; */
+  color:white;
+  background:none;
+  border:none;
+  cursor: pointer;
+}
+.sidebar{
+  position:fixed;
+  transform: translateX(-30rem);
+  width:30rem;
+  background-color:grey;
+  height:100%;
+ 
+  /* keep sidebar -30 rem at x */
+}
+.sidebar.open{
+   transform: translateX(0);
+}
+.sidebar-close-button{
+  border-radius:50%;
+  height: 3rem;
+  width:3rem;
+  position: absolute;
+  right:3rem;
+  top:1.6rem;
+  font-size:2rem;
+
+}
