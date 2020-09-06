@@ -6,3 +6,6 @@
        
     ]
 }
+
+//  npm install @babel/cli @babel/core @babel/node @babel/preset-env nodemon  --save-dev 
+//this code change es5 to es6 formula

@@ -1,6 +1,21 @@
 import express from 'express';
 import data from './data';
+import config from './config'
+import dotenv from 'dotenv';
+import mongoose from 'mongoose'
+import userroute from './route/userroute'
+//config mogodb
+dotenv.config();
+const mongoDbUrl = config.MONGODB_URL
+mongoose.connect(mongoDbUrl,{
+    useNewUrlParser:true,
+    useUnifiedTopology: true,
+    useCreateIndex:true
+},
+    ).catch(error=>console.log(error.reason));
+    
 const app = express();
+app.use("/api/users",userroute);
 app.get("/api/products",(req, res)=>{
     res.send(data.products)
 });
