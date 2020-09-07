@@ -4,6 +4,7 @@ import config from './config'
 import dotenv from 'dotenv';
 import mongoose from 'mongoose'
 import userroute from './route/userroute'
+import bodyParser from 'body-parser';
 //config mogodb
 dotenv.config();
 const mongoDbUrl = config.MONGODB_URL
@@ -15,7 +16,9 @@ mongoose.connect(mongoDbUrl,{
     ).catch(error=>console.log(error.reason));
     
 const app = express();
+app.use(bodyParser.json());//FOR POST REQUEST
 app.use("/api/users",userroute);
+
 app.get("/api/products",(req, res)=>{
     res.send(data.products)
 });
