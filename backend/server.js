@@ -4,6 +4,7 @@ import config from './config'
 import dotenv from 'dotenv';
 import mongoose from 'mongoose'
 import userroute from './route/userroute'
+import productRoute from './route/productRoute'
 import bodyParser from 'body-parser';
 //config mogodb
 dotenv.config();
@@ -17,20 +18,23 @@ mongoose.connect(mongoDbUrl,{
     
 const app = express();
 app.use(bodyParser.json());//FOR POST REQUEST
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/users",userroute);
-
-app.get("/api/products",(req, res)=>{
-    res.send(data.products)
-});
-app.get("/api/products/:id",(req, res)=>{
-    const productId = req.params.id;
-    const product = data.products.find(x=>x._id === productId);
-    if(product){
-        res.send(product);
-    }else{
-        res.status(404).send({msg:"not found"});
-    }
-});
+app.use("/api/products",productRoute)
+// app.get("/api/products",(req, res)=>{
+//     res.send(data.products)
+// });
+// app.get("/api/products/:id",(req, res)=>{
+//     const productId = req.params.id;
+//     const product = data.products.find(x=>x._id === productId);
+//     if(product){
+//         res.send(product);
+//     }else{
+//         res.status(404).send({msg:"not found"});
+//     }
+// });
 // kuayu
 // app.all('*', function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
