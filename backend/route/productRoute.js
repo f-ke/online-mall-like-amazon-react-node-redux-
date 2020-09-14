@@ -1,5 +1,6 @@
 import Product from '../model/productModel';
 import express from 'express';
+import {isAdmin,isAuth} from '../util'
 
 const router = express.Router();
 router.get("/",async(req,res)=>{
@@ -27,7 +28,7 @@ router.post("/", async (req, res)=>{
      return res.status(500).send({message:'failed to create'});
 })
 
-router.put("/:id", async (req, res)=>{
+router.put("/:id", isAuth, isAdmin,async (req, res)=>{
     //console.log(req.body)
     const productId = req.params.id;
     const product = await Product.findOne({_id:productId});
@@ -51,6 +52,16 @@ router.put("/:id", async (req, res)=>{
         
             
             
+        })
+        router.delete("/:id",isAuth, isAdmin,async (req,res)=>{
+            const productId = req.params.id;
+            const deleteProduct = await Product.findOne({_id:productId});
+            if(deleteProduct){
+                await deleteProduct.remove();
+                return res.send({msg:"sucessful delete"});
+            }
+            return res.send({msg:"delete fail"});
+
         })
 
     
