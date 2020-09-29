@@ -1,13 +1,14 @@
 import express from 'express';
 import data from './data';
 import config from './config'
-import dotenv from 'dotenv';
+
 import mongoose from 'mongoose'
 import userroute from './route/userroute'
 import productRoute from './route/productRoute'
+import orderRoute from './route/orderRoute'
 import bodyParser from 'body-parser';
 //config mogodb
-dotenv.config();
+
 const mongoDbUrl = config.MONGODB_URL
 mongoose.connect(mongoDbUrl,{
     useNewUrlParser:true,
@@ -23,6 +24,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/users",userroute);
 app.use("/api/products",productRoute)
+app.use("/api/orders",orderRoute)
+app.get("/api/config/paypal",(req,res)=>{
+    res.send(config.PAYPAL_CLIENT_ID);
+})
 // app.get("/api/products",(req, res)=>{
 //     res.send(data.products)
 // });
@@ -46,7 +51,9 @@ app.use("/api/products",productRoute)
 //   });
   
 
-app.listen(5000, ()=>{
+app.listen(config.PORT, ()=>{
     console.log("server start sucessfully at localhost:5000");
 }
     );
+app.use(express.static(path.join(__dirname, '/../frontend/build')));
+app.get('*', (req, res) => res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`)));

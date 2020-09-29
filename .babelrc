@@ -1,11 +1,15 @@
 {
     "presets": [
         [
-            "@babel/preset-env"
+            "@babel/preset-env",
+            {"targets":{"node":"current"}}
+        
         ]
        
     ]
+    
 }
 
 //  npm install @babel/cli @babel/core @babel/node @babel/preset-env nodemon  --save-dev 
 //this code change es5 to es6 formula
+//then edit code in package.jason scripts
