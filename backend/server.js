@@ -7,6 +7,7 @@ import userroute from './route/userroute'
 import productRoute from './route/productRoute'
 import orderRoute from './route/orderRoute'
 import bodyParser from 'body-parser';
+import path from 'path';
 //config mogodb
 
 const mongoDbUrl = config.MONGODB_URL
@@ -50,9 +51,15 @@ app.get("/api/config/paypal",(req,res)=>{
 //     next();
 //   });
   
-if(process.env.NODE_ENV ==='production'){
+/*if(process.env.NODE_ENV ==='production'){
    app.use(express.static('frontend/build'))
- }
+ }*/
+// app.use(express.static(path.join(__dirname, '/../frontend/build')));
+// app.get('*', (req, res) => res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`)));
+app.use(express.static(path.join(__dirname, '/../frontend/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
+});
 app.listen(config.PORT, ()=>{
     console.log("server start sucessfully at localhost:5000");
 }
